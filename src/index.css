@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Spring-themed navbar flourish effects */
+.nav-link-spring {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+  overflow: visible;
+}
+
+/* Decorative flowers that appear on hover - positioned above the text */
+.nav-link-spring::before {
+  content: '✿ ❀ ✿';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  font-size: 14px;
+  color: #e592a2;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  letter-spacing: 8px;
+}
+
+/* Decorative grass that appears on hover - positioned below the text */
+.nav-link-spring::after {
+  content: '⟡ ❋ ⟡ ❋ ⟡';
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  font-size: 12px;
+  color: #a8b888;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  letter-spacing: 6px;
+}
+
+/* Hover state - flowers and grass spring up/down into view */
+.nav-link-spring:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-link-spring:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Responsive design for mobile - hide decorative elements on small screens */
+@media (max-width: 768px) {
+  .nav-link-spring::before,
+  .nav-link-spring::after {
+    display: none;
+  }
+}
