@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { Heart, Calendar, MapPin, Users, Gift, ChevronDown } from 'lucide-react';
+import { Heart, Calendar, MapPin, Users, Gift, ChevronDown, Menu, X } from 'lucide-react';
 import { supabase } from './supabaseClient';
 
 function App() {
@@ -8,11 +8,13 @@ function App() {
     fullName: '',
     email: '',
     attendance: 'yes',
+    brunchAttendance: 'yes',
     guestCount: 1,
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const weddingDate = new Date('2026-04-25T00:00:00');
 
@@ -41,6 +43,7 @@ function App() {
         full_name: formData.fullName,
         email: formData.email,
         attendance: formData.attendance,
+        brunch_attendance: formData.brunchAttendance,
         message: formData.message
       });
 
@@ -51,6 +54,7 @@ function App() {
         fullName: '',
         email: '',
         attendance: 'yes',
+        brunchAttendance: 'yes',
         guestCount: 1,
         message: ''
       });
@@ -67,44 +71,83 @@ function App() {
     <div className="min-h-screen bg-[#eddbca]">
       <nav className="fixed top-0 w-full bg-[#cfcd99] shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-3 items-center py-3">
-            {/* Left: Couple name as logo */}
-            <div className="justify-self-start">
-              <a href="#home" className="couple-name text-white text-lg font-serif hidden sm:flex">
+          <div className="relative py-3">
+            {/* Desktop layout: 3-column grid */}
+            <div className="hidden lg:grid lg:grid-cols-3 items-center">
+              {/* Left: Couple name as logo */}
+              <div className="justify-self-start">
+                <a href="#home" className="couple-name text-white text-lg font-serif flex">
+                  <span>Coralanne</span>
+                  <Heart className="w-5 h-5 text-[#f9a58a] transition-all" />
+                  <span>Alexander</span>
+                </a>
+              </div>
+
+              {/* Center: Navigation links */}
+              <div className="justify-self-center">
+                <div className="relative inline-flex items-center">
+                  {/* Top horizontal bar */}
+                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-white/40"></div>
+
+                  {/* Navigation links */}
+                  <div className="flex space-x-3 sm:space-x-6 md:space-x-10 px-3 sm:px-4 py-2">
+                    {['Our Story', 'RSVP', 'The Details', 'Travels', 'Gallery', 'FAQs'].map((item) => (
+                      <a
+                        key={item}
+                        href={`#${item.toLowerCase().replace(' ', '-')}`}
+                        className="nav-link-spring text-white hover:text-[#e592a2] transition-colors text-sm sm:text-base tracking-wide relative whitespace-nowrap"
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
+
+                  {/* Bottom horizontal bar */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-white/40"></div>
+                </div>
+              </div>
+
+              {/* Right: Empty for balance */}
+              <div className="justify-self-end"></div>
+            </div>
+
+            {/* Mobile layout: Centered couple name with hamburger on right */}
+            <div className="lg:hidden flex items-center justify-center">
+              <a href="#home" className="couple-name text-white text-lg font-serif flex">
                 <span>Coralanne</span>
                 <Heart className="w-5 h-5 text-[#f9a58a] transition-all" />
                 <span>Alexander</span>
               </a>
+
+              {/* Hamburger menu button - absolute positioned to top-right */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="absolute right-2 text-white p-2 hover:text-[#e592a2] transition-colors"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
             </div>
-
-            {/* Center: Navigation links */}
-            <div className="justify-self-center">
-              <div className="relative inline-flex items-center">
-                {/* Top horizontal bar */}
-                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-white/40"></div>
-
-                {/* Navigation links */}
-                <div className="flex space-x-3 sm:space-x-6 md:space-x-10 px-3 sm:px-4 py-2">
-                  {['Our Story', 'RSVP', 'The Details', 'Gallery', 'FAQs'].map((item) => (
-                    <a
-                      key={item}
-                      href={`#${item.toLowerCase().replace(' ', '-')}`}
-                      className="nav-link-spring text-white hover:text-[#e592a2] transition-colors text-sm sm:text-base tracking-wide relative whitespace-nowrap"
-                    >
-                      {item}
-                    </a>
-                  ))}
-                </div>
-
-                {/* Bottom horizontal bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-white/40"></div>
-              </div>
-            </div>
-
-            {/* Right: Empty for balance */}
-            <div className="justify-self-end"></div>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-[#cfcd99] border-t border-white/20">
+            <div className="px-4 py-2 space-y-2">
+              {['Our Story', 'RSVP', 'The Details', 'Travels', 'Gallery', 'FAQs'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-white hover:text-[#e592a2] transition-colors py-2 text-base tracking-wide"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
       <section id="home" className="relative h-screen overflow-hidden">
@@ -174,13 +217,23 @@ function App() {
 
           <div className="text-center">
             <p className="text-[#f5d7ca] text-xl leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Our love story is no typical love story, nor is it a grand love story you will find in Hollywood movies. This love story is unique and special. It starts with a young girl walking into a coffee shop, Coralanne, and a young man robbing the store. Then, out of nowhere, my knight in shining armor stepped up and KILLED the guy robbing the store with one of his special raisin fart attacks.
+              Like most young millennials during COVID, Coralanne and AJ found themselves on a dating app. The app meant to be deleted in fact, Hinge. And delete the app they did. They followed proper COVID etiquette and maintained 6ft of distance for their first month and a half of getting to know each other. After some drive-in movie dates and lots of picnics, AJ asked Coralanne if she'd like to shorten the 6ft distance and become his girlfriend. She said "yes!"
             </p>
             <p className="text-[#f5d7ca] text-xl leading-relaxed mt-6" style={{ fontFamily: "'Playfair Display', serif" }}>
-              At that moment, I was in awe; I knew I had found the one for me. I went up to him and said, 'Me, you, dino nuggets at my place. 5 o'clock — be there or be a square.'
+              Coralanne quickly realized there was something very special about AJ, so when he told her he was thinking of moving out of state after only 6 months of dating, she said that was fine because she'd move with him. AJ played job roulette and landed in Boston, Massachusetts. Coralanne was still working on her Master's….so long distance was the only answer. They learned a lot about themselves and each other—like how long distance sucks.
             </p>
             <p className="text-[#f5d7ca] text-xl leading-relaxed mt-6" style={{ fontFamily: "'Playfair Display', serif" }}>
-              And Alexander replied, 'Dino nuggies are my favorite!'
+              After a year of flying back and forth between Boston and Houston passed, Coralanne hopped off the stage with her diploma, into the car with her belongings and drove up to Boston. This is where the real test began. Introducing AJ's daughter Ruby and Coralanne's son Gigi to each other. Though there were many initial hisses, the blended family pushed through…to less hissing.
+            </p>
+            <p className="text-[#f5d7ca] text-xl leading-relaxed mt-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Through all the ups and downs, Coralanne and AJ have built a life together. In June 2025, AJ planned a surprise proposal with friends and family under the guise of a Beyoncé concert. Again, Coralanne said "yes!"
+            </p>
+            <p className="text-[#f5d7ca] text-xl leading-relaxed mt-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Now AJ and Coralanne are embarking on their next adventure together: marriage. Will there be another pandemic? Will the cats ever get along? What genre will Beyoncé's next album be? Only one way to find out.
+            </p>
+            <p className="text-[#f5d7ca] text-xl leading-relaxed mt-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+              See you at the wedding!<br />
+              Coralanne and AJ
             </p>
           </div>
         </div>
@@ -191,7 +244,10 @@ function App() {
           <h2 className="text-5xl md:text-6xl font-serif text-center text-[#695c22] mb-4 font-light tracking-wide">
             RSVP
           </h2>
-          <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-16"></div>
+          <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-4"></div>
+          <p className="text-center text-[#695c22] text-2xl mb-12" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Please RSVP by February 14th, 2026
+          </p>
 
           <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 border border-[#e4919f]/20">
             <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
@@ -220,10 +276,25 @@ function App() {
               </div>
 
               <div>
-                <label className="block text-[#695c22] text-lg mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Will you attend?</label>
+                <label className="block text-[#695c22] text-lg mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Will you be attending the ceremony?</label>
+                <p className="text-[#ae611b] text-sm mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>April 25, 2026 at 3:30 PM</p>
                 <select
                   value={formData.attendance}
                   onChange={(e) => setFormData({ ...formData, attendance: e.target.value })}
+                  className="w-full px-4 py-3 border border-[#d4a3a6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cf2f75] bg-[#f5d7ca]/20"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  <option value="yes">Accept with pleasure</option>
+                  <option value="no">Regretfully decline</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[#695c22] text-lg mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Will you be attending the farewell brunch?</label>
+                <p className="text-[#ae611b] text-sm mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>April 26, 2026 at 10 AM</p>
+                <select
+                  value={formData.brunchAttendance}
+                  onChange={(e) => setFormData({ ...formData, brunchAttendance: e.target.value })}
                   className="w-full px-4 py-3 border border-[#d4a3a6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cf2f75] bg-[#f5d7ca]/20"
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
@@ -277,7 +348,7 @@ function App() {
           </h2>
           <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-16"></div>
 
-          <div className="max-w-2xl mx-auto mb-20">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
             <div className="bg-white rounded-lg shadow-lg p-8 border border-[#e4919f]/20">
               <div className="w-12 h-12 bg-[#95b5da] rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Heart className="w-6 h-6 text-white" />
@@ -294,13 +365,30 @@ function App() {
                 </p>
               </div>
             </div>
+
+            <div className="bg-white rounded-lg shadow-lg p-8 border border-[#e4919f]/20">
+              <div className="w-12 h-12 bg-[#95b5da] rounded-full flex items-center justify-center mb-4 mx-auto">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-3xl font-serif text-[#695c22] mb-6 text-center">Farewell Brunch</h3>
+              <div className="space-y-4 text-[#ae611b] text-center">
+                <p className="flex items-center justify-center gap-2 text-lg">
+                  <Calendar className="w-5 h-5 flex-shrink-0 text-[#cf2f75]" />
+                  <span>April 26, 2026 at 10:00 AM</span>
+                </p>
+                <p className="flex items-start justify-center gap-2 text-lg">
+                  <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#cf2f75]" />
+                  <span>Location: TBD</span>
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 mb-12 border border-[#e4919f]/20">
             <h3 className="text-4xl font-serif text-center text-[#695c22] mb-8">Attire</h3>
             <div className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xl text-[#ae611b] leading-relaxed">
-                We kindly request that our guests dress in <span className="italic">Spring Cocktail</span> attire.
+                We invite you to celebrate with us in cocktail attire with a springtime feel. Think floral prints (Florals in spring? Groundbreaking.), soft pastels, and lighter fabrics are encouraged. Appropriate attire includes suits or blazers with dress pants, and dresses or jumpsuits. For comfort in the Houston weather, lighter materials are recommended; however, please refrain from casual wear such as jeans or sundresses.
               </p>
             </div>
 
@@ -313,12 +401,111 @@ function App() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 border border-[#e4919f]/20">
-            <h3 className="text-4xl font-serif text-center text-[#695c22] mb-8">Travel Accommodations</h3>
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-xl text-[#ae611b] leading-relaxed">
-                Information about travel accommodations will be provided here.
+        </div>
+      </section>
+
+      <section
+        id="travels"
+        className="relative py-20 bg-cover bg-center overflow-hidden"
+        style={{
+          backgroundImage: 'url(/history-of-houston.jpg)'
+        }}
+      >
+        <div className="absolute inset-0 bg-[#695c22]/70"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-5xl md:text-6xl font-serif text-center text-white mb-4 font-light tracking-wide">
+            Travel Accommodations
+          </h2>
+          <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-12"></div>
+
+          <div className="max-w-4xl mx-auto">
+            <p className="text-[#f5d7ca] text-xl leading-relaxed text-center mb-12" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Given the size of our party, we are not able to reserve a hotel block. We do however have some lodging recommendations.
+            </p>
+
+            <div className="bg-white/95 rounded-lg shadow-lg p-8 md:p-12 mb-8 border border-[#e4919f]/20">
+              <h3 className="text-3xl font-serif text-[#695c22] mb-8 text-center">Lodging</h3>
+
+              <div className="space-y-8">
+                <div>
+                  <h4 className="text-2xl font-serif text-[#695c22] mb-3">Hotel Saint Augustine</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    4110 Loretto Drive<br />
+                    Houston, TX 77006<br />
+                    Located in the Montrose neighborhood.<br />
+                    Just a short 18-minute walk or 2-minute drive to the venue.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-2xl font-serif text-[#695c22] mb-3">The Sam Houston, Curio Collection by Hilton</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    1117 Prairie Street<br />
+                    Houston, TX 77002<br />
+                    Located in Downtown Houston near Coralanne's old apartment!<br />
+                    A 13-minute drive or 28-minute bus ride.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-2xl font-serif text-[#695c22] mb-3">AirBnB Recommendations</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    We recommend staying in the Montrose neighborhood if you're choosing an Airbnb, as this is the neighborhood where the wedding venue is located. Other nearby neighborhoods we recommend are the Heights or Midtown.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white/95 rounded-lg shadow-lg p-8 md:p-12 mb-8 border border-[#e4919f]/20">
+              <h3 className="text-3xl font-serif text-[#695c22] mb-4 text-center">Places to Eat</h3>
+              <p className="text-[#ae611b] text-center mb-6 text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Houston is a foodie city! Here are some of our favorite restaurants.
               </p>
+
+              <ul className="space-y-3 text-[#ae611b] text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <li>• Truth's BBQ (get here at least 30 minutes before open)</li>
+                <li>• Nancy's Hustle</li>
+                <li>• Xochii</li>
+                <li>• The Breakfast Klub (again, line up begins before open)</li>
+                <li>• Wanna Bao</li>
+              </ul>
+            </div>
+
+            <div className="bg-white/95 rounded-lg shadow-lg p-8 md:p-12 border border-[#e4919f]/20">
+              <h3 className="text-3xl font-serif text-[#695c22] mb-4 text-center">Places to Visit</h3>
+              <p className="text-[#ae611b] text-center mb-8 text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
+                There is so much to do in the city of Houston. Below we are putting top must-see's of Houston.
+              </p>
+
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-xl font-serif text-[#695c22] mb-2">The Menil</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    A free art collection where AJ and Coralanne had many of their picnics.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-serif text-[#695c22] mb-2">The Natural Science Museum</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    Where Coralanne likes to brag about how extensive the paleontology collection is as if she collected the bones herself.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-serif text-[#695c22] mb-2">The MFAH</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    AJ loves the Persian historical exhibit.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-serif text-[#695c22] mb-2">Hermann Park</h4>
+                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    Coralanne and AJ saw a wombat here once.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -378,15 +565,27 @@ function App() {
             {[
               {
                 question: 'Can I bring a plus one?',
-                answer: 'Unfortunately not due to the limited space of the venue. We ask each person who is invited to register separately using the RSVP form.'
+                answer: 'Due to the intimate size of our venue, we are unfortunately unable to accommodate additional guests. We can only invite those formally invited. We appreciate your understanding!'
               },
               {
                 question: 'Are children allowed?',
-                answer: 'Yes… maybe? We honestly don\'t know yet.'
+                answer: 'Due to space constraints, we are unable to accommodate children. We appreciate you making arrangements so you can celebrate with us!'
               },
               {
-                question: 'Will there be a wedding registry?',
-                answer: 'Your presence at our wedding is the greatest gift of all. However, if you wish to give us a gift, we are accepting monetary contributions that will be used toward our honeymoon.'
+                question: 'Is there a wedding registry?',
+                answer: 'We don\'t have a traditional registry, as we\'re focusing on experiences rather than things! If you were thinking of giving a gift to help us celebrate, a contribution to our honeymoon fund would make our dream trip a reality.'
+              },
+              {
+                question: 'What is the weather like in Houston?',
+                answer: 'April in Houston typically features highs of 80°F and lows of 60°F. It\'s also the peak of wildflower season, so the city is in full bloom. We recommend bringing allergy medicine just in case.'
+              },
+              {
+                question: 'Will the ceremony be indoors or outdoors?',
+                answer: 'Weather permitting, the ceremony will be held outdoors. If the Houston weather doesn\'t cooperate, we will move everything inside.'
+              },
+              {
+                question: 'What happens after the ceremony?',
+                answer: 'Once we say "I do," the party begins! We\'ll head straight into an evening of delicious food, drinks, plenty of dancing and a bit of karaoke. Get ready to celebrate!'
               }
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md border border-[#e4919f]/20 overflow-hidden">
