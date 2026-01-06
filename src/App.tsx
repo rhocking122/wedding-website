@@ -152,13 +152,9 @@ function App() {
 
       <section id="home" className="relative h-screen overflow-hidden">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed"
           style={{
             backgroundImage: 'url(/wallyphoto.png)',
-            backgroundPosition: 'center center',
-            backgroundAttachment: 'fixed',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
@@ -175,7 +171,7 @@ function App() {
                 fontSize: 'clamp(45px, 8vw, 80px)'
               }}
             >
-              We're Getting Married!
+              We're Getting Married
             </h2>
 
             <h1
@@ -195,13 +191,15 @@ function App() {
         </div>
       </section>
 
-      <section
-        id="our-story"
-        className="relative py-20 bg-cover bg-center overflow-hidden"
-        style={{
-          backgroundImage: 'url(/img_8001%20copy.jpg)'
-        }}
-      >
+      <section id="our-story" className="relative py-20 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/img_8001%20copy.jpg)',
+            backgroundSize: 'cover',
+            minHeight: '100%'
+          }}
+        ></div>
         <div className="absolute inset-0 bg-[#695c22]/70"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
@@ -404,13 +402,15 @@ function App() {
         </div>
       </section>
 
-      <section
-        id="travels"
-        className="relative py-20 bg-cover bg-center overflow-hidden"
-        style={{
-          backgroundImage: 'url(/history-of-houston.jpg)'
-        }}
-      >
+      <section id="travels" className="relative py-20 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/history-of-houston.jpg)',
+            backgroundSize: 'cover',
+            minHeight: '100%'
+          }}
+        ></div>
         <div className="absolute inset-0 bg-[#695c22]/70"></div>
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-5xl md:text-6xl font-serif text-center text-white mb-4 font-light tracking-wide">
