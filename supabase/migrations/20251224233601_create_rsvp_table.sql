@@ -22,23 +22,16 @@ CREATE TABLE IF NOT EXISTS rsvps (
   full_name text NOT NULL,
   email text NOT NULL,
   attendance text NOT NULL,
+  brunch_attendance text DEFAULT 'no',
   guest_count integer DEFAULT 1,
   message text,
   created_at timestamptz DEFAULT now()
 );
 
-ALTER TABLE rsvps ENABLE ROW LEVEL SECURITY;
+alter table rsvps enable row level security;
 
--- Allow anyone to submit an RSVP
-CREATE POLICY "Anyone can submit RSVP"
-  ON rsvps
-  FOR INSERT
-  TO anon
-  WITH CHECK (true);
-
--- Allow authenticated users to view all RSVPs (for the couple to manage)
-CREATE POLICY "Authenticated users can view all RSVPs"
-  ON rsvps
-  FOR SELECT
-  TO authenticated
-  USING (true);
+create policy "Allow public RSVP inserts"
+on rsvps
+for insert
+to anon
+with check (true);

@@ -91,7 +91,7 @@ function App() {
 
                   {/* Navigation links */}
                   <div className="flex space-x-3 sm:space-x-6 md:space-x-10 px-3 sm:px-4 py-2">
-                    {['Our Story', 'RSVP', 'The Details', 'Travels', 'Gallery', 'FAQs'].map((item) => (
+                    {['Our Story', 'The Details', 'RSVP', 'Travels', 'Gallery', 'FAQs'].map((item) => (
                       <a
                         key={item}
                         href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -135,7 +135,7 @@ function App() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-[#cfcd99] border-t border-white/20">
             <div className="px-4 py-2 space-y-2">
-              {['Our Story', 'RSVP', 'The Details', 'Travels', 'Gallery', 'FAQs'].map((item) => (
+              {['Our Story', 'The Details', 'RSVP', 'Travels', 'Gallery', 'FAQs'].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase().replace(' ', '-')}`}
@@ -215,7 +215,7 @@ function App() {
 
           <div className="text-center">
             <p className="text-[#f5d7ca] text-xl leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Like most young millennials during COVID, Coralanne and AJ found themselves on a dating app. The app meant to be deleted in fact, Hinge. And delete the app they did. They followed proper COVID etiquette and maintained 6ft of distance for their first month and a half of getting to know each other. After some drive-in movie dates and lots of picnics, AJ asked Coralanne if she'd like to shorten the 6ft distance and become his girlfriend. She said "yes!"
+              Like many millennials during COVID, Coralanne and AJ found themselves on a dating app. The app meant to be deleted in fact, Hinge. And delete the app they did. They followed proper COVID etiquette and maintained 6ft of distance for their first month and a half of getting to know each other. After some drive-in movie dates and lots of picnics, AJ asked Coralanne if she'd like to shorten the 6ft distance and become his girlfriend. She said "yes!"
             </p>
             <p className="text-[#f5d7ca] text-xl leading-relaxed mt-6" style={{ fontFamily: "'Playfair Display', serif" }}>
               Coralanne quickly realized there was something very special about AJ, so when he told her he was thinking of moving out of state after only 6 months of dating, she said that was fine because she'd move with him. AJ played job roulette and landed in Boston, Massachusetts. Coralanne was still working on her Master's….so long distance was the only answer. They learned a lot about themselves and each other—like how long distance sucks.
@@ -237,6 +237,70 @@ function App() {
         </div>
       </section>
 
+      <section id="the-details" className="py-20 bg-[#ede9dd]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-5xl md:text-6xl font-serif text-center text-[#695c22] mb-4 font-light tracking-wide">
+            The Details
+          </h2>
+          <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-16"></div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+            <div className="bg-white rounded-lg shadow-lg p-8 border border-[#e4919f]/20">
+              <div className="w-12 h-12 bg-[#95b5da] rounded-full flex items-center justify-center mb-4 mx-auto">
+                <Heart className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-3xl font-serif text-[#695c22] mb-6 text-center">Ceremony</h3>
+              <p className="text-xl text-[#695c22] mb-6 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Reception to follow</p>
+              <div className="space-y-4 text-[#ae611b] text-center">
+                <p className="flex items-center justify-center gap-2 text-lg">
+                  <Calendar className="w-5 h-5 flex-shrink-0 text-[#cf2f75]" />
+                  <span>April 25, 2026 at 3:30 PM</span>
+                </p>
+                <p className="flex items-start justify-center gap-2 text-lg">
+                  <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#cf2f75]" />
+                  <span>1607 Missouri Street<br />Houston, TX 77006</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg p-8 border border-[#e4919f]/20">
+              <div className="w-12 h-12 bg-[#95b5da] rounded-full flex items-center justify-center mb-4 mx-auto">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-3xl font-serif text-[#695c22] mb-6 text-center">Farewell Brunch</h3>
+              <div className="space-y-4 text-[#ae611b] text-center">
+                <p className="flex items-center justify-center gap-2 text-lg">
+                  <Calendar className="w-5 h-5 flex-shrink-0 text-[#cf2f75]" />
+                  <span>April 26, 2026 at 10:00 AM</span>
+                </p>
+                <p className="flex items-start justify-center gap-2 text-lg">
+                  <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#cf2f75]" />
+                  <span>Location: TBD</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 mb-12 border border-[#e4919f]/20">
+            <h3 className="text-4xl font-serif text-center text-[#695c22] mb-8">Attire</h3>
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <p className="text-xl text-[#ae611b] leading-relaxed">
+                We invite you to celebrate with us in cocktail attire with a springtime feel. Think floral prints (Florals in spring? Groundbreaking.), soft pastels or bright colors. Wear something you feel good in! Suits, dress shirts and dress pants, dresses, jumpsuits, etc. For comfort in the Houston weather, lighter materials are recommended; however, please refrain from casual wear such as jeans or sundresses.
+              </p>
+            </div>
+
+            <div className="flex justify-center">
+              <img
+                src="/dresscode.png"
+                alt="Dress Code"
+                className="max-w-full h-auto rounded-lg"
+              />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <section id="rsvp" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-5xl md:text-6xl font-serif text-center text-[#695c22] mb-4 font-light tracking-wide">
@@ -244,7 +308,7 @@ function App() {
           </h2>
           <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-4"></div>
           <p className="text-center text-[#695c22] text-2xl mb-12" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Please RSVP by February 14th, 2026
+            Please RSVP by March 1st, 2026
           </p>
 
           <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 border border-[#e4919f]/20">
@@ -339,69 +403,6 @@ function App() {
         </div>
       </section>
 
-      <section id="the-details" className="py-20 bg-[#ede9dd]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-5xl md:text-6xl font-serif text-center text-[#695c22] mb-4 font-light tracking-wide">
-            The Details
-          </h2>
-          <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-16"></div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
-            <div className="bg-white rounded-lg shadow-lg p-8 border border-[#e4919f]/20">
-              <div className="w-12 h-12 bg-[#95b5da] rounded-full flex items-center justify-center mb-4 mx-auto">
-                <Heart className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-3xl font-serif text-[#695c22] mb-6 text-center">Ceremony</h3>
-              <div className="space-y-4 text-[#ae611b] text-center">
-                <p className="flex items-center justify-center gap-2 text-lg">
-                  <Calendar className="w-5 h-5 flex-shrink-0 text-[#cf2f75]" />
-                  <span>April 25, 2026 at 3:30 PM</span>
-                </p>
-                <p className="flex items-start justify-center gap-2 text-lg">
-                  <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#cf2f75]" />
-                  <span>1607 Missouri Street<br />Houston, TX 77006</span>
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-lg p-8 border border-[#e4919f]/20">
-              <div className="w-12 h-12 bg-[#95b5da] rounded-full flex items-center justify-center mb-4 mx-auto">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-3xl font-serif text-[#695c22] mb-6 text-center">Farewell Brunch</h3>
-              <div className="space-y-4 text-[#ae611b] text-center">
-                <p className="flex items-center justify-center gap-2 text-lg">
-                  <Calendar className="w-5 h-5 flex-shrink-0 text-[#cf2f75]" />
-                  <span>April 26, 2026 at 10:00 AM</span>
-                </p>
-                <p className="flex items-start justify-center gap-2 text-lg">
-                  <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#cf2f75]" />
-                  <span>Location: TBD</span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg p-8 md:p-12 mb-12 border border-[#e4919f]/20">
-            <h3 className="text-4xl font-serif text-center text-[#695c22] mb-8">Attire</h3>
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <p className="text-xl text-[#ae611b] leading-relaxed">
-                We invite you to celebrate with us in cocktail attire with a springtime feel. Think floral prints (Florals in spring? Groundbreaking.), soft pastels, and lighter fabrics are encouraged. Appropriate attire includes suits or blazers with dress pants, and dresses or jumpsuits. For comfort in the Houston weather, lighter materials are recommended; however, please refrain from casual wear such as jeans or sundresses.
-              </p>
-            </div>
-
-            <div className="flex justify-center">
-              <img
-                src="/dresscode.png"
-                alt="Dress Code"
-                className="max-w-full h-auto rounded-lg"
-              />
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       <section id="travels" className="relative py-20 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -419,38 +420,39 @@ function App() {
           <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-12"></div>
 
           <div className="max-w-4xl mx-auto">
-            <p className="text-[#f5d7ca] text-xl leading-relaxed text-center mb-12" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Given the size of our party, we are not able to reserve a hotel block. We do however have some lodging recommendations.
-            </p>
+            <div className="bg-white/95 rounded-lg shadow-lg p-8 md:p-12 mb-8 border border-[#e4919f]/20">
+              <h3 className="text-3xl font-serif text-[#695c22] mb-8 text-center">Hotel Block</h3>
+
+              <p className="text-[#ae611b] leading-relaxed mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+                While the celebration will take place at a private residence, we've reserved a hotel block nearby at the oldest hotel in Houston! Please be sure to book before April 6th, 2026.
+              </p>
+
+              <div className="space-y-2">
+                <h4 className="text-2xl font-serif text-[#695c22] mb-3">The Sam Houston, Curio Collection by Hilton</h4>
+                <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  1117 Prairie Street, Houston, Texas 77002<br />
+                  Located in Downtown Houston near Coralanne's old apartment<br />
+                  Approximately a 13-minute drive or 28-minute bus ride from the venue
+                </p>
+              </div>
+            </div>
 
             <div className="bg-white/95 rounded-lg shadow-lg p-8 md:p-12 mb-8 border border-[#e4919f]/20">
-              <h3 className="text-3xl font-serif text-[#695c22] mb-8 text-center">Lodging</h3>
+              <h3 className="text-3xl font-serif text-[#695c22] mb-8 text-center">Other Lodging</h3>
 
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <div>
                   <h4 className="text-2xl font-serif text-[#695c22] mb-3">Hotel Saint Augustine</h4>
                   <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
-                    4110 Loretto Drive<br />
-                    Houston, TX 77006<br />
-                    Located in the Montrose neighborhood.<br />
-                    Just a short 18-minute walk or 2-minute drive to the venue.
+                    4110 Loretto Drive, Houston, TX 77006<br />
+                    Located in the Montrose neighborhood<br />
+                    Approximately an 18-minute walk or 2-minute drive to the venue
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-2xl font-serif text-[#695c22] mb-3">The Sam Houston, Curio Collection by Hilton</h4>
                   <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
-                    1117 Prairie Street<br />
-                    Houston, TX 77002<br />
-                    Located in Downtown Houston near Coralanne's old apartment!<br />
-                    A 13-minute drive or 28-minute bus ride.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-2xl font-serif text-[#695c22] mb-3">AirBnB Recommendations</h4>
-                  <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
-                    We recommend staying in the Montrose neighborhood if you're choosing an Airbnb, as this is the neighborhood where the wedding venue is located. Other nearby neighborhoods we recommend are the Heights or Midtown.
+                    We recommend staying in the Montrose neighborhood if you're choosing an Airbnb, as this is where the wedding venue is located. Other nearby neighborhoods we recommend are The Heights or Midtown.
                   </p>
                 </div>
               </div>
@@ -474,7 +476,7 @@ function App() {
             <div className="bg-white/95 rounded-lg shadow-lg p-8 md:p-12 border border-[#e4919f]/20">
               <h3 className="text-3xl font-serif text-[#695c22] mb-4 text-center">Places to Visit</h3>
               <p className="text-[#ae611b] text-center mb-8 text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
-                There is so much to do in the city of Houston. Below we are putting top must-see's of Houston.
+                Some of our most loved spots in Houston
               </p>
 
               <div className="space-y-6">
@@ -488,7 +490,7 @@ function App() {
                 <div>
                   <h4 className="text-xl font-serif text-[#695c22] mb-2">The Natural Science Museum</h4>
                   <p className="text-[#ae611b] leading-relaxed" style={{ fontFamily: "'Playfair Display', serif" }}>
-                    Where Coralanne likes to brag about how extensive the paleontology collection is as if she collected the bones herself.
+                    Where Coralanne likes to brag about how extensive the paleontology collection is as if she collected the fossils herself.
                   </p>
                 </div>
 
@@ -513,18 +515,13 @@ function App() {
 
       <section id="gallery" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-5xl md:text-6xl font-serif text-center text-[#695c22] mb-4 font-light tracking-wide">
-            Gallery
-          </h2>
-          <div className="w-24 h-1 bg-[#cf2f75] mx-auto mb-16"></div>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
               '/img_0497.jpg',
-              '/img_1998.jpg',
+              '/img_1998_copy.jpg',
               '/img_8031.jpg',
               '/img_8001.jpg',
-              '/64ccaf04-cc4e-43de-9688-6d09734e461a000115360016.jpeg',
+              '/64ccaf04-cc4e-43de-9688-6d09734e461a000115360016 copy.jpeg',
               '/img_6754.jpg',
               '/309fd33a-8e4c-46ff-befd-3ff0fce33ea2.jpg',
               '/img_6554.jpg'
@@ -586,6 +583,10 @@ function App() {
               {
                 question: 'What happens after the ceremony?',
                 answer: 'Once we say "I do," the party begins! We\'ll head straight into an evening of delicious food, drinks, plenty of dancing and a bit of karaoke. Get ready to celebrate!'
+              },
+              {
+                question: 'Where can I park?',
+                answer: 'We\'re having a backyard wedding in a residential area where some streets are permit-only. However, cars parked on Missouri Street (where the venue is located) do not need a permit. If you\'re parking on a different street, please be mindful of posted signage.'
               }
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md border border-[#e4919f]/20 overflow-hidden">
